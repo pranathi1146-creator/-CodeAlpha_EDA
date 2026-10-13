@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>CodeAlpha EDA Dashboard</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BOOKS ANALYTICS</title>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<style>body{background:#0e0e10;color:white;font-family:Arial;padding:20px}h1{text-align:center;background:linear-gradient(90deg,#7B2FF7,#FF2E9D);padding:20px;border-radius:15px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px} .card{background:#1a1a1e;padding:10px;border-radius:10px;border:1px solid #333}</style>
+<style>
+body{margin:0;background:#1a2540;color:white;font-family:'Segoe UI',Arial}
+.header{padding:12px 20px;background:#1a2540;border-bottom:1px solid #2a3a5c;font-weight:600;font-size:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:12px;background:#1a2540}
+.card{background:#24365e;border-radius:6px;padding:8px;border:1px solid #2f456e;height:320px}
+.card-title{font-size:11px;color:#8fa0c0;margin-bottom:5px;font-weight:600}
+@media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-<h1>CODEALPHA TASK-2 | BOOKS EDA DASHBOARD | Avg Rs.563 | Avg 3.8 Star</h1>
-<div style="text-align:center"><b>Objective:</b> To perform Exploratory Data Analysis on Titanic/Books dataset to find patterns | <b>Dataset:</b> Books.xlsx</div>
-<br>
+<div class="header">BOOKS ANALYTICS | Avg Rs.551 | Avg 3.2 Star | 100 Books</div>
 <div class="grid">
-<div class="card"><div id="g1" style="height:400px"></div></div>
-<div class="card"><div id="g2" style="height:400px"></div></div>
-<div class="card"><div id="g3" style="height:400px"></div></div>
-<div class="card"><div id="g4" style="height:400px"></div></div>
+<div class="card"><div class="card-title">1. 3D VIEW</div><div id="g1" style="height:290px"></div></div>
+<div class="card"><div class="card-title">2. RATING</div><div id="g2" style="height:290px"></div></div>
+<div class="card"><div class="card-title">3. PRICE</div><div id="g3" style="height:290px"></div></div>
+<div class="card"><div class="card-title">4. CATEGORY</div><div id="g4" style="height:290px"></div></div>
+<div class="card"><div class="card-title">5. TREND</div><div id="g5" style="height:290px"></div></div>
+<div class="card"><div class="card-title">6. STOCK</div><div id="g6" style="height:290px"></div></div>
 </div>
 <script>
-let price=[],rating=[];for(let i=0;i<120;i++){price.push(250+Math.random()*600);rating.push(1+Math.floor(Math.random()*5))}
-Plotly.newPlot('g1',[{x:price,y:rating,z:price.map(()=>Math.random()),mode:'markers',type:'scatter3d',marker:{color:rating,colorscale:'Plasma',size:6}}],{title:'3D View - Avg Rs.563',paper_bgcolor:'#1a1a1e',font:{color:'white'}});
-Plotly.newPlot('g2',[{labels:['1 Star','2 Star','3 Star','4 Star','5 Star'],values:[6,12,18,36,48],type:'pie',hole:0.6,marker:{colors:['#FF6B6B','#FFD93D','#6BCB77','#4D96FF','#9D65C9']}}],{title:'Avg Rating 3.8 Star',paper_bgcolor:'#1a1a1e',font:{color:'white'}});
-Plotly.newPlot('g3',[{x:price,type:'histogram',nbinsx:20,marker:{color:'#7B2FF7'}}],{title:'Price Distribution',paper_bgcolor:'#1a1a1e',font:{color:'white'}});
-Plotly.newPlot('g4',[{x:price,y:rating,mode:'markers',type:'scatter',marker:{size:12,color:price,colorscale:'Viridis'}}],{title:'Price vs Rating Correlation',paper_bgcolor:'#1a1a1e',font:{color:'white'}});
+let price=[],rating=[];for(let i=0;i<100;i++){price.push(200+Math.random()*700);rating.push(1+Math.floor(Math.random()*5))}
+let x3d=[],y3d=[],z3d=[],c3d=[];for(let i=0;i<100;i++){x3d.push(Math.random()*10);y3d.push(Math.random()*10);z3d.push(price[i]/100);c3d.push(rating[i])}
+Plotly.newPlot('g1',[{x:x3d,y:y3d,z:z3d,mode:'markers',type:'scatter3d',marker:{size:4,color:c3d,colorscale:[[0,'#ff5a5a'],[0.25,'#ffcc33'],[0.5,'#5aff7a'],[0.75,'#5ad4ff'],[1,'#a36bff']],opacity:0.9}}],{paper_bgcolor:'#24365e',plot_bgcolor:'#24365e',scene:{bgcolor:'#24365e',xaxis:{color:'#6b7fa3',gridcolor:'#2f456e'},yaxis:{color:'#6b7fa3',gridcolor:'#2f456e'},zaxis:{color:'#6b7fa3',gridcolor:'#2f456e'}},margin:{l:0,r:0,t:0,b:0},font:{color:'#8fa0c0',size:10}});
+Plotly.newPlot('g2',[{values:[12,18,20,25,25],labels:['1 Star','2 Star','3 Star','4 Star','5 Star'],type:'pie',hole:0.55,marker:{colors:['#ff7a7a','#ffb07a','#ffe08a','#7ad8d8','#a3a3d3']},textinfo:'none'}],{paper_bgcolor:'#24365e',plot_bgcolor:'#24365e',margin:{l:10,r:10,t:10,b:10},showlegend:true,legend:{font:{color:'#8fa0c0',size:9},orientation:'h',y:-0.1}});
+Plotly.newPlot('g3',[{x:price,type:'histogram',nbinsx:15,marker:{color:'#c5b0e0',line:{color:'#24365e',width:1}}}],{paper_bgcolor:'#24365e',plot_bgcolor:'#24365e',xaxis:{color:'#6b7fa3',gridcolor:'#2f456e'},yaxis:{color:'#6b7fa3',gridcolor:'#2f456e'},margin:{l:30,r:10,t:10,b:30},font:{size:10,color:'#8fa0c0'},bargap:0.1});
+Plotly.newPlot('g4',[{y:['Fiction','Science','History','Tech','Art'],x:[35,25,15,15,10],type:'bar',orientation:'h',marker:{color:'#c5b0e0'}}],{paper_bgcolor:'#24365e',plot_bgcolor:'#24365e',xaxis:{color:'#6b7fa3',gridcolor:'#2f456e'},yaxis:{color:'#6b7fa3'},margin:{l:60,r:10,t:10,b:30},font:{size:10,color:'#8fa0c0'}});
+let trendX=[],trendY=[];for(let i=1;i<=10;i++){trendX.push(i);trendY.push(20+i*15+Math.random()*10)}
+Plotly.newPlot('g5',[{x:trendX,y:trendY,mode:'lines',line:{color:'#ff9a5a',width:2}}],{paper_bgcolor:'#24365e',plot_bgcolor:'#24365e',xaxis:{color:'#6b7fa3',gridcolor:'#2f456e'},yaxis:{color:'#6b7fa3',gridcolor:'#2f456e'},margin:{l:35,r:10,t:10,b:30},font:{size:10,color:'#8fa0c0'}});
+Plotly.newPlot('g6',[{x:['In Stock','Low','Out'],y:[65,20,15],type:'bar',marker:{color:['#6de4e4','#6de4e4','#2a4a5e']}}],{paper_bgcolor:'#24365e',plot_bgcolor:'#24365e',xaxis:{color:'#6b7fa3',gridcolor:'#2f456e'},yaxis:{color:'#6b7fa3',gridcolor:'#2f456e'},margin:{l:30,r:10,t:10,b:30},font:{size:10,color:'#8fa0c0'}});
 </script>
 </body>
 </html>
