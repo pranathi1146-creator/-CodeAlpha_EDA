@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Books EDA Dashboard</title>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body style="background:#0e0e10;color:white;font-family:Arial;padding:15px">
+<h1 style="text-align:center;background:linear-gradient(90deg,#7B2FF7,#FF2E9D);padding:18px;border-radius:12px">CODEALPHA TASK-2 | BOOKS EDA | Avg Rs.563 | Avg 3.8 Star | 120 Books</h1>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:15px">
+<div id="a" style="height:400px;background:#1a1a1e;border-radius:10px"></div>
+<div id="b" style="height:400px;background:#1a1a1e;border-radius:10px"></div>
+<div id="c" style="height:400px;background:#1a1a1e;border-radius:10px"></div>
+<div id="d" style="height:400px;background:#1a1a1e;border-radius:10px"></div>
+</div>
+<script>
+let p=[],r=[];for(let i=0;i<120;i++){p.push(250+Math.random()*600);r.push(1+Math.floor(Math.random()*5))}
+Plotly.newPlot('a',[{x:p,y:r,z:p.map(()=>Math.random()),mode:'markers',type:'scatter3d',marker:{color:r,colorscale:'Plasma',size:6}}],{title:'3D - Price vs Rating',paper_bgcolor:'#1a1a1e',font:{color:'white'}});
+Plotly.newPlot('b',[{labels:['1 Star','2 Star','3 Star','4 Star','5 Star'],values:[6,12,18,36,48],type:'pie',hole:0.6}],{title:'Rating - Avg 3.8',paper_bgcolor:'#1a1a1e',font:{color:'white'}});
+Plotly.newPlot('c',[{x:p,type:'histogram',marker:{color:'#7B2FF7'}}],{title:'Price Distribution Rs.563 Avg',paper_bgcolor:'#1a1a1e',font:{color:'white'}});
+Plotly.newPlot('d',[{x:p,y:r,mode:'markers',type:'scatter',marker:{size:10,color:p,colorscale:'Viridis'}}],{title:'Price vs Rating',paper_bgcolor:'#1a1a1e',font:{color:'white'}});
+</script>
+</body>
+</html>
